@@ -1,0 +1,27 @@
+*{
+font-size: 16px;
+font-family: Arial;
+}
+
+.cookie{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 300px;
+    width: auto;
+    padding-top: 100px;
+    transition: all 1s;
+}
+.cktext{
+    display: flex;
+    justify-content: center;
+    font-size: 150px;
+    font-weight: bolder;
+}
+.cktext p{
+    font-size: 50px;
+    font-weight: bolder;
+}
+.cookieimg{
+    transition: all 1s;
+}
