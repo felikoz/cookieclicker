@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cookie clicker</title>
+    <title>Cookie Clicker</title>
     <link rel="stylesheet" href="cookiestyel.css">
 </head>
 <body>
-<div class="cktext">
-<p class="txt">cookies</p>
-</div>
-<div class="cookie">
-<img src="img/cookie.png" alt="cookie"class="cookieimg">
-</div>
+    <div class="cktext">
+        <ul class="textLi">
+       <li > <p class="txt">0 cookies</p></li>
+        <li><p class="cps">0 cookies per second</p></li>
+        </ul>
+    </div>
+    <div class="cookie">
+        <img src="img/cookie.png" alt="Cookie" class="cookieimg">
+    </div>
+    <div class="upgrade">
+        <ul class="upgrades-list">
+            <li class="up1">Upgrade 1 (0) - 10 cookies</li>
+            <li class="up2">Upgrade 2 (0) - 100 cookies</li>
+        </ul>
+        <button class="click-upgrade">Upgrade 1</button>
+        <button class="cps-upgrade">Upgrade 2</button>
+    </div>
+    <script src="cookiejs.js"></script>
 </body>
-<script src="cookiejs.js"></script>
 </html>
