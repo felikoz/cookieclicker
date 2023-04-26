@@ -1,66 +1,77 @@
+
 class Game {
     constructor() {
-        this.cookies = 10000000;
-        this.cookiesPerSecond = 0;
-        this.upgrade1Count = 0;
-        this.upgrade1Price = 10;
-        this.upgrade2Count = 0;
-        this.upgrade2Price = 100;
+        this.cookies = new Big(0);
+        this.cookiesPerSecond = new Big(0);
+        this.upgrade1Count = new Big(0);
+        this.upgrade1Price = new Big(10);
+        this.upgrade2Count =  new Big(0);
+        this.upgrade2Price = new Big(100);
         this.interval = null;
         this.upgrademultiplyer = 1;
     }
     
     click() {
         let cookieClick = document.querySelector(".cookieimg");
-        cookieClick.style.animation = 'scale 0.2s forwards';
-        this.cookies += 1;
+        document.querySelector('.cookieimg').style.transform = 'scale(1)';
+        document.querySelector('.cookieimg').style.animation = 'scale 0.2s ease 0s 1 normal forwards running';
+        this.cookies = this.cookies.plus(1);
         let text = `${this.cookies} cookies`;
-        document.querySelector(".txt").innerHTML = text;    
-    }
+        document.querySelector(".txt").innerHTML = text;
+      }
 
     updateCookiesPerSecond() {
-        this.cookiesPerSecond += this.upgrade1Count * 0.1;
-        this.cookiesPerSecond += this.upgrade2Count ;
+        this.cookiesPerSecond = this.upgrade1Count.times(0.1).plus(this.upgrade2Count);
         let cpsText = `${this.cookiesPerSecond.toFixed(1)} cookies per second`;
         document.querySelector(".cps").innerHTML = cpsText;
     }
 
     buyUpgrade1() {
-        if (this.cookies >= this.upgrade1Price) {
-            this.cookies -= this.upgrade1Price;
-            this.upgrade1Count += 1;
-            let upgrade1Text = `Upgrade 1 (${this.upgrade1Count}) - ${this.upgrade1Price.toFixed(2)} cookies`;
-            document.querySelector(".up1").innerHTML = upgrade1Text;
-            this.upgrade1Price += 10 + this.upgrade1Count * 0.1;
-            let upgrade2Text = `Upgrade 2 (${this.upgrade2Count}) - ${this.upgrade2Price.toFixed(2)} cookies`;
-            document.querySelector(".up2").innerHTML = upgrade2Text;
-            this.updateCookiesPerSecond();
+        if (this.cookies.gte(this.upgrade1Price)) {
+          this.cookies = this.cookies.minus(this.upgrade1Price);
+          this.upgrade1Count = this.upgrade1Count.plus(1);
+          this.upgrade1Price = this.upgrade1Price.plus(this.upgrade1Count).times(0.1);
+          let upgrade1Text = `Upgrade 1 (${this.upgrade1Count}) - ${this.upgrade1Price.toFixed(2)} cookies`;
+          document.querySelector(".up1").innerHTML = upgrade1Text;
+          let upgrade2Text = `Upgrade 2 (${this.upgrade2Count}) - ${this.upgrade2Price.toFixed(2)} cookies`;
+          document.querySelector(".up2").innerHTML = upgrade2Text;
+          this.updateCookiesPerSecond();
+          let text = `${this.cookies} cookies`;
+            document.querySelector(".txt").innerHTML = text;
+        } else {
+          window.alert("you don't have enough cookies");
         }
-        else{
-           window.alert("you don't have enougt cookies")
-        }
-    }
-
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+    
     buyUpgrade2() {
-        if (this.cookies >= this.upgrade2Price) {
-            this.cookies -= this.upgrade2Price;
-            this.upgrade2Count += 1;
+        if (this.cookies.gte(this.upgrade2Price)) {
+            this.cookies = this.cookies.minus(this.upgrade2Price);
+            this.upgrade2Count = this.upgrade2Count.plus(1);
+            this.upgrade2Price = this.upgrade2Price.plus(this.upgrade2Count);
             let upgrade2Text = `Upgrade 2 (${this.upgrade2Count}) - ${this.upgrade2Price.toFixed(2)} cookies`;
             document.querySelector(".up2").innerHTML = upgrade2Text;
-            this.upgrade2Price += 100 + this.upgrade2Count * 0.2; 
             let upgrade1Text = `Upgrade 1 (${this.upgrade1Count}) - ${this.upgrade1Price.toFixed(2)} cookies`;
             document.querySelector(".up1").innerHTML = upgrade1Text;
-            this.upgrademultiplyer += 0.1;
             this.updateCookiesPerSecond();
+            let text = `${this.cookies} cookies`;
+            document.querySelector(".txt").innerHTML = text;
         }
         else{
-            window.alert("you don't have enougt cookies")
-         }
+            window.alert("you don't have enough cookies");
+        }
     }
 
     startCookieLoop() {
             this.interval = setInterval(() => {
-            this.cookies += this.cookiesPerSecond
+            this.cookies = this.cookies.plus(this.cookiesPerSecond);
             let text = `${this.cookies} cookies`;
             document.querySelector(".txt").innerHTML = text;
         }, 1000);
@@ -73,8 +84,8 @@ class Game {
 }
 
 let newGame = new Game();
-let clickUpgrade = document.querySelector(".click-upgrade");
-let cpsUpgrade = document.querySelector(".cps-upgrade");
+let clickUpgrade = document.querySelector(".catupgrade");
+let cpsUpgrade = document.querySelector(".rexupgrade");
 
 let cookieClick = document.querySelector(".cookieimg");
 cookieClick.addEventListener("click", function() {
@@ -92,6 +103,10 @@ cpsUpgrade.addEventListener("click", function() {
 cookieClick.addEventListener('animationend', function() {
     this.style.animation = '';
 });
+
+
+
+ 
 
 
 

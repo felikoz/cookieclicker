@@ -54,5 +54,19 @@ ul{
     display:grid;
 }
 
+.upgrades-list{
+    font-size: 50px;
+    justify-content: center;
+    font-family:Arial;
+    font-size: 30px;
+    font-weight: 500;
+}  
 
 
+
+.upgrades-list li{
+   margin-top: 50px;
+   font-family:Arial;
+   font-size: 30px;
+   font-weight: bolder;
+}
